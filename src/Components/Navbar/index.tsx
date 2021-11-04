@@ -2,8 +2,23 @@ import { Container, LogoContainer, IconsContainer } from "./styles";
 import { FaShoppingCart, FaSearch } from "react-icons/fa";
 import { BiLogIn } from "react-icons/bi";
 import { IconButton } from "@chakra-ui/react";
+import { useAuth } from "../../context/Auth";
+import { useHistory } from "react-router";
+import { useState } from "react";
 
 export const Navbar = () => {
+  const [authToken, setAuthToken] = useState<string>(
+    () => localStorage.getItem("@kenzieBurguer:token") || ""
+  );
+  const history = useHistory();
+  const Logout = () => {
+    localStorage.clear();
+
+    setAuthToken("");
+
+    history.push("/");
+    console.log("entrou");
+  };
   return (
     <Container>
       <LogoContainer>
@@ -22,7 +37,12 @@ export const Navbar = () => {
           variant="ghost"
           icon={<FaShoppingCart />}
         />
-        <IconButton aria-label="login" variant="ghost" icon={<BiLogIn />} />
+        <IconButton
+          aria-label="login"
+          variant="ghost"
+          icon={<BiLogIn />}
+          onClick={() => Logout()}
+        />
       </IconsContainer>
     </Container>
   );
