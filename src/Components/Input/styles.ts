@@ -20,7 +20,6 @@ export const InputContainer = styled.div`
   border: 2px solid var(--lightGrey);
   color: var(--lightGray);
   padding: 1rem;
-  width: 100%;
   display: flex;
   transition: 0.4s;
 

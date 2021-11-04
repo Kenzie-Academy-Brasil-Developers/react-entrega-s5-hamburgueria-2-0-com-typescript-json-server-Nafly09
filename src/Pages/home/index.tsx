@@ -1,4 +1,11 @@
-import { Container, Content, AnimationContainer } from "./styles";
+import {
+  Container,
+  Content,
+  AnimationContainer,
+  Header,
+  HeadlineContainer,
+  StyledForm,
+} from "./styles";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
@@ -8,6 +15,9 @@ import Input from "../../Components/Input";
 import { ButtonComponent } from "../../Components/Button";
 import api from "../../Services/api";
 import { useHistory } from "react-router";
+import bag from "../../assets/shopping-bag.svg";
+import { Flex } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 
 interface User {
   email: string;
@@ -22,6 +32,7 @@ interface UserData {
 
 export const Login = () => {
   const history = useHistory();
+  const toast = useToast();
   const schema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Campo Obrigatório"),
     password: yup.string().required("Campo Obrigatório"),
@@ -46,18 +57,52 @@ export const Login = () => {
           "@kenzieBurguer:token",
           JSON.stringify(accessToken)
         );
+        toast({
+          title: "Login bem sucedido",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
 
-        return history.push("/store");
+        history.push("/store");
       })
-      .catch((e) => console.log(e));
+      .catch((e) =>
+        toast({
+          title: "Ocorreu um erro",
+          description: `${e.response.data}`,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      );
   };
 
   return (
     <Container>
+      <Header>
+        <h1>
+          Burguer <span>Kenzie</span>
+        </h1>
+      </Header>
+      <HeadlineContainer>
+        <div>
+          <img src={bag} />
+        </div>
+        <h2
+          style={{
+            alignSelf: "center",
+            fontSize: 14,
+            fontWeight: 500,
+          }}
+        >
+          A vida é como um sanduíche, é preciso recheá-la com os{" "}
+          <strong>melhores</strong> ingredientes.
+        </h2>
+      </HeadlineContainer>
+
       <Content>
         <AnimationContainer>
-          <form onSubmit={handleSubmit(onSubmitFunction)}>
-            <h1>Login</h1>
+          <StyledForm onSubmit={handleSubmit(onSubmitFunction)}>
             <Input
               register={register}
               name="email"
@@ -80,11 +125,12 @@ export const Login = () => {
               variant="solid"
               innerText="Logar"
               type="submit"
-            ></ButtonComponent>
+              isFullWidth
+            />
             <p>
               Não tem uma conta? Crie a sua <Link to="signup">Agora</Link>
             </p>
-          </form>
+          </StyledForm>
         </AnimationContainer>
       </Content>
     </Container>

@@ -4,7 +4,44 @@ import { keyframes } from "styled-components";
 export const Container = styled.div`
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: stretch;
+`;
+
+export const Header = styled.div`
+  > h1 {
+    font-size: 30px;
+    font-weight: bolder;
+    margin: 1rem;
+    > span {
+      font-size: 20px;
+      color: var(--logored);
+    }
+  }
+`;
+
+export const HeadlineContainer = styled.div`
+  display: flex;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 4px 40px -20px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  box-sizing: border-box;
+  max-width: 100vw;
+  min-height: 95px;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin-right: 1rem;
+    min-width: 60px;
+    min-height: 60px;
+    max-height: 60px;
+    background-color: #27ae601a;
+  }
 `;
 
 export const Content = styled.div`
@@ -12,7 +49,16 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  max-width: 100vw;
+`;
+
+export const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 100vw;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
 `;
 
 const customAppearence = keyframes`
@@ -36,7 +82,6 @@ export const AnimationContainer = styled.div`
 
   form {
     margin: 80px 0;
-    width: 340px;
     text-align: center;
 
     h1 {

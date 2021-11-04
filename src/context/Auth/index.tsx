@@ -8,6 +8,7 @@ import {
 } from "react";
 import { useHistory } from "react-router";
 import api from "../../Services/api";
+import { useToast } from "@chakra-ui/react";
 
 interface User {
   email: string;
@@ -33,6 +34,7 @@ const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
+  const toast = useToast();
   const [data, setData] = useState<User[]>([]);
 
   const [authToken, setAuthToken] = useState<string>(
@@ -48,10 +50,24 @@ export const AuthProvider = ({ children }: AuthProps) => {
         localStorage.setItem("@kenzieBurguer:token", response.data.accessToken);
 
         setAuthToken(response.data.accessToken);
+        toast({
+          title: "Conta criada com sucesso",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
 
         history.push("/store");
       })
-      .catch((e) => console.log(e));
+      .catch((e) =>
+        toast({
+          title: "Ocorreu um erro",
+          description: `${e.response.data}`,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      );
   };
 
   const Logout = () => {

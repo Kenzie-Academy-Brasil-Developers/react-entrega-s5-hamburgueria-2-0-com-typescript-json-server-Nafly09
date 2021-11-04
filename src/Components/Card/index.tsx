@@ -1,14 +1,34 @@
 import { CardContainer, ImageContainer, InfoContainer } from "./styles";
 import { ButtonComponent } from "../Button";
 
+interface Product {
+  name: string;
+  price: number;
+  category: string;
+  img: string;
+}
+
 interface CardProps {
   heading: string;
   caption: string;
   price: string;
   img: string;
+  product: any;
+  innerText?: string;
+  callback: (product: Product) => void;
+  colorScheme: string;
 }
 
-export const Card = ({ heading, caption, price, img }: CardProps) => {
+export const Card = ({
+  heading,
+  caption,
+  price,
+  img,
+  product,
+  innerText,
+  callback,
+  colorScheme,
+}: CardProps) => {
   return (
     <CardContainer>
       <ImageContainer>
@@ -19,9 +39,10 @@ export const Card = ({ heading, caption, price, img }: CardProps) => {
         <span>{caption}</span>
         <p>{price}</p>
         <ButtonComponent
-          colorScheme="green"
+          colorScheme={`${colorScheme}`}
           variant="solid"
-          innerText="Adicionar"
+          innerText={`${innerText}`}
+          onClick={() => callback(product)}
         />
       </InfoContainer>
     </CardContainer>
