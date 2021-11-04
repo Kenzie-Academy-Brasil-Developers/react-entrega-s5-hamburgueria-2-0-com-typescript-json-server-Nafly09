@@ -2,7 +2,6 @@ import { Container, LogoContainer, IconsContainer } from "./styles";
 import { FaShoppingCart, FaSearch } from "react-icons/fa";
 import { BiLogIn } from "react-icons/bi";
 import { IconButton } from "@chakra-ui/react";
-import { useAuth } from "../../context/Auth";
 import { useHistory } from "react-router";
 import { useState } from "react";
 
@@ -17,7 +16,6 @@ export const Navbar = () => {
     setAuthToken("");
 
     history.push("/");
-    console.log("entrou");
   };
   return (
     <Container>

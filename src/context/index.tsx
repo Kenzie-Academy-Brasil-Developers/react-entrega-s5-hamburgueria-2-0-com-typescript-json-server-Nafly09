@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { CatalogueProvider } from "./catalogue/context";
+import { AuthProvider } from "./Auth/index";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -8,7 +9,9 @@ interface ProvidersProps {
 export const Providers = ({ children }: ProvidersProps) => {
   return (
     <>
-      <CatalogueProvider>{children}</CatalogueProvider>
+      <CatalogueProvider>
+        <AuthProvider>{children} </AuthProvider>
+      </CatalogueProvider>
     </>
   );
 };

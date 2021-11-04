@@ -1,12 +1,19 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useHistory } from "react-router";
 import api from "../../Services/api";
 
 interface User {
   email: string;
   password: string;
-  name: string;
-  age: string;
+  passwordConfirm: string;
+  name?: string;
 }
 
 interface AuthProps {
@@ -18,21 +25,22 @@ interface AuthProviderData {
   Logout: () => void;
   authToken: string;
   data: any;
-  setAuthToken: React.Dispatch<React.SetStateAction<string>>;
+  setAuthToken: Dispatch<SetStateAction<string>>;
+  setData: Dispatch<SetStateAction<any>>;
 }
 
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
-  const [data, setData] = useState({});
+  const [data, setData] = useState<User[]>([]);
 
   const [authToken, setAuthToken] = useState<string>(
     () => localStorage.getItem("@kenzieBurguer:token") || ""
   );
 
-  const signUp = async (userData: User) => {
-    await api
+  const signUp = (userData: User) => {
+    api
       .post("/register", userData)
       .then((response) => {
         setData(response.data);
@@ -43,7 +51,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
 
         history.push("/store");
       })
-      .catch((err) => console.log(err));
+      .catch((e) => console.log(e));
   };
 
   const Logout = () => {
@@ -52,12 +60,11 @@ export const AuthProvider = ({ children }: AuthProps) => {
     setAuthToken("");
 
     history.push("/");
-    console.log("entrou");
   };
 
   return (
     <AuthContext.Provider
-      value={{ authToken, Logout, signUp, data, setAuthToken }}
+      value={{ authToken, Logout, signUp, data, setAuthToken, setData }}
     >
       {children}
     </AuthContext.Provider>

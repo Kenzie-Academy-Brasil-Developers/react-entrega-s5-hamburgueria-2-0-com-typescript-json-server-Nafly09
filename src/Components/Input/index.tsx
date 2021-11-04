@@ -3,8 +3,8 @@ import { Container, InputContainer } from "./styles";
 function Input({
   label,
   icon: Icon,
-  register,
   name,
+  register,
   error = "",
   ...rest
 }: any) {

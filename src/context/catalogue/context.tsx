@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   createContext,
   ReactNode,
@@ -28,7 +27,6 @@ const CatalogueContext = createContext<CatalogueProviderData>(
 
 export const CatalogueProvider = ({ children }: CatalogueProps) => {
   const [catalogue, setCatalogue] = useState([]);
-  console.log(catalogue);
 
   const getCatalogue = () => {
     api

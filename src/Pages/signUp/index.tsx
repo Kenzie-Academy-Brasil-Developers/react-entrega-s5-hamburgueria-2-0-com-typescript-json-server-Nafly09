@@ -43,37 +43,37 @@ export const SignUp = () => {
           <form onSubmit={handleSubmit(signUp)}>
             <h1>Cadastro</h1>
             <Input
+              name="name"
               register={register}
               icon={FiUser}
               label="Nome"
               placeholder="Seu nome completo"
-              name="name"
               error={errors.name?.message}
             />
             <Input
-              register={register}
               name="email"
+              register={register}
               icon={FiMail}
               label="Email"
               placeholder="Seu melhor email"
               error={errors.email?.message}
             />
             <Input
+              name="password"
               register={register}
               icon={FiLock}
               label="Senha"
               placeholder="Uma senha bem segura"
               type="password"
-              name="password"
               error={errors.password?.message}
             />
             <Input
+              name="passwordConfirm"
               register={register}
               icon={FiLock}
               label="Confirmação de senha"
               placeholder="Confirmação de senha"
               type="password"
-              name="passwordConfirm"
               error={errors.passwordConfirm?.message}
             />
             <ButtonComponent
