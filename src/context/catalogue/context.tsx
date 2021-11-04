@@ -27,7 +27,8 @@ const CatalogueContext = createContext<CatalogueProviderData>(
 );
 
 export const CatalogueProvider = ({ children }: CatalogueProps) => {
-  const [catalogue, setCatalogue] = useState<Product[]>([]);
+  const [catalogue, setCatalogue] = useState([]);
+  console.log(catalogue);
 
   const getCatalogue = () => {
     api
@@ -47,4 +48,4 @@ export const CatalogueProvider = ({ children }: CatalogueProps) => {
   );
 };
 
-export const useCart = () => useContext(CatalogueContext);
+export const useCatalogue = () => useContext(CatalogueContext);

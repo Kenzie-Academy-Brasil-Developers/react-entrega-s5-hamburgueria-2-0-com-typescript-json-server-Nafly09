@@ -15,6 +15,14 @@ export default createGlobalStyle`
     --green: #219653;
     --lightgreen: #eaf7f0;
     --logored: #eb5757;
-    --red: #E60000
+    --red: #E60000;
+    --grey: #E0E0E0
+}
+
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    align-self: center;
 }
 `;
