@@ -83,22 +83,23 @@ export const Login = () => {
         <h1>
           Burguer <span>Kenzie</span>
         </h1>
+        <HeadlineContainer>
+          <div>
+            <img src={bag} />
+          </div>
+          <h2
+            style={{
+              alignSelf: "center",
+              fontSize: 14,
+              fontWeight: 500,
+              width: "16rem",
+            }}
+          >
+            A vida é como um sanduíche, é preciso recheá-la com os{" "}
+            <strong>melhores</strong> ingredientes.
+          </h2>
+        </HeadlineContainer>
       </Header>
-      <HeadlineContainer>
-        <div>
-          <img src={bag} />
-        </div>
-        <h2
-          style={{
-            alignSelf: "center",
-            fontSize: 14,
-            fontWeight: 500,
-          }}
-        >
-          A vida é como um sanduíche, é preciso recheá-la com os{" "}
-          <strong>melhores</strong> ingredientes.
-        </h2>
-      </HeadlineContainer>
 
       <Content>
         <AnimationContainer>

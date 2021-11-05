@@ -8,7 +8,7 @@ export const Store = () => {
   const { catalogue } = useCatalogue();
   const { addProduct } = useCart();
   return (
-    <>
+    <div style={{ minWidth: "100vw" }}>
       <Navbar />
       <Container>
         {catalogue.map((product, index) => (
@@ -25,6 +25,6 @@ export const Store = () => {
           />
         ))}
       </Container>
-    </>
+    </div>
   );
 };

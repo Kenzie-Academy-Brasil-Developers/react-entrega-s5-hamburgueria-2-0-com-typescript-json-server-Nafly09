@@ -2,10 +2,15 @@ import styled from "styled-components";
 import { keyframes } from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
+  justify-content: space-around;
+  min-width: 100vw;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 export const Header = styled.div`
@@ -22,11 +27,13 @@ export const Header = styled.div`
 
 export const HeadlineContainer = styled.div`
   display: flex;
+  flex: column;
+  justify-content: center;
   border: 1px solid #e0e0e0;
   box-shadow: 0px 4px 40px -20px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   box-sizing: border-box;
-  max-width: 100vw;
+  max-width: 377px;
   min-height: 95px;
   padding: 0.5rem;
   margin: 0 0.5rem;
