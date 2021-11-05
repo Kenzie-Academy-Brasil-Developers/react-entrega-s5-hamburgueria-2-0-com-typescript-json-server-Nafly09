@@ -16,7 +16,6 @@ import { ButtonComponent } from "../../Components/Button";
 import api from "../../Services/api";
 import { useHistory } from "react-router";
 import bag from "../../assets/shopping-bag.svg";
-import { Flex } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
 
 interface User {
@@ -129,7 +128,10 @@ export const Login = () => {
               isFullWidth
             />
             <p>
-              Não tem uma conta? Crie a sua <Link to="signup">Agora</Link>
+              Não tem uma conta? Crie a sua{" "}
+              <Link to="signup" style={{ color: "green" }}>
+                Agora
+              </Link>
             </p>
           </StyledForm>
         </AnimationContainer>

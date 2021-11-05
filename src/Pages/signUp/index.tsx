@@ -7,6 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../context/Auth";
 import Input from "../../Components/Input";
 import { ButtonComponent } from "../../Components/Button/index";
+import { Header, HeadlineContainer } from "../home/styles";
+import bag from "../../assets/shopping-bag.svg";
 
 export const SignUp = () => {
   const { signUp } = useAuth();
@@ -41,7 +43,6 @@ export const SignUp = () => {
       <Content>
         <AnimationContainer>
           <form onSubmit={handleSubmit(signUp)}>
-            <h1>Cadastro</h1>
             <Input
               name="name"
               register={register}
@@ -83,11 +84,35 @@ export const SignUp = () => {
               type="submit"
             ></ButtonComponent>
             <p>
-              Já tem uma conta? Faça seu <Link to="/">Login</Link>
+              Já tem uma conta? Faça seu{" "}
+              <Link to="/" style={{ color: "green" }}>
+                Login
+              </Link>
             </p>
           </form>
         </AnimationContainer>
       </Content>
+      <Header>
+        <h1>
+          Burguer <span>Kenzie</span>
+        </h1>
+        <HeadlineContainer>
+          <div>
+            <img src={bag} />
+          </div>
+          <h2
+            style={{
+              alignSelf: "center",
+              fontSize: 14,
+              fontWeight: 500,
+              width: "16rem",
+            }}
+          >
+            A vida é como um sanduíche, é preciso recheá-la com os{" "}
+            <strong>melhores</strong> ingredientes.
+          </h2>
+        </HeadlineContainer>
+      </Header>
     </Container>
   );
 };
