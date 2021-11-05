@@ -33,10 +33,14 @@ export const HeadlineContainer = styled.div`
   box-shadow: 0px 4px 40px -20px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   box-sizing: border-box;
-  max-width: 377px;
+  width: 100vw;
   min-height: 95px;
   padding: 0.5rem;
   margin: 0 0.5rem;
+
+  @media (min-width: 425px) {
+    width: 377px;
+  }
 
   > div {
     display: flex;
