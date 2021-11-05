@@ -3,7 +3,6 @@ import { FaShoppingCart, FaSearch } from "react-icons/fa";
 import { BiLogIn } from "react-icons/bi";
 import { IconButton } from "@chakra-ui/react";
 import { useHistory } from "react-router";
-import { useState, useRef } from "react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import {
   Drawer,
@@ -18,12 +17,25 @@ import { useCart } from "../../context/cart";
 import { Card } from "../Card";
 import { ButtonComponent } from "../Button";
 import { useAuth } from "../../context/Auth";
+import { SlideFade } from "@chakra-ui/react";
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { useCatalogue } from "../../context/catalogue/context";
+import { useState } from "react";
 
 export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [search, setSearch] = useState("");
+  const { isOpen: isSearchOpen, onToggle } = useDisclosure();
   const { cart, deleteProduct } = useCart();
   const { Logout } = useAuth();
+  const { handleSearch } = useCatalogue();
   const history = useHistory();
+  const getTotalValue = () => {
+    const value = cart
+      .map((product) => Number(product.price))
+      .reduce((a, b) => a + b, 0);
+    return Math.round(value * 100) / 100;
+  };
   return (
     <>
       <Container>
@@ -37,6 +49,7 @@ export const Navbar = () => {
             aria-label="Search database"
             variant="ghost"
             icon={<FaSearch />}
+            onClick={onToggle}
           />
           <IconButton
             aria-label="cart"
@@ -72,6 +85,7 @@ export const Navbar = () => {
                 colorScheme="red"
               />
             ))}
+            <p>Total: R$ {getTotalValue()}</p>
           </DrawerBody>
 
           <DrawerFooter>
@@ -88,6 +102,28 @@ export const Navbar = () => {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
+
+      <SlideFade in={isSearchOpen} offsetY="-80px">
+        <InputGroup size="md">
+          <Input
+            pr="4.5rem"
+            placeholder="Digite a categoria do produto"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <InputRightElement width="2.5rem">
+            <IconButton
+              aria-label="Search database"
+              icon={<FaSearch />}
+              onClick={() => {
+                handleSearch(search);
+                setSearch("");
+              }}
+              colorScheme="green"
+            />
+          </InputRightElement>
+        </InputGroup>
+      </SlideFade>
     </>
   );
 };

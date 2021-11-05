@@ -20,13 +20,14 @@ interface CatalogueProps {
 
 interface CatalogueProviderData {
   catalogue: Product[];
+  handleSearch: (userInput: string) => void;
 }
 const CatalogueContext = createContext<CatalogueProviderData>(
   {} as CatalogueProviderData
 );
 
 export const CatalogueProvider = ({ children }: CatalogueProps) => {
-  const [catalogue, setCatalogue] = useState([]);
+  const [catalogue, setCatalogue] = useState<Product[]>([]);
 
   const getCatalogue = () => {
     api
@@ -34,13 +35,24 @@ export const CatalogueProvider = ({ children }: CatalogueProps) => {
       .then((response) => setCatalogue(response.data))
       .catch((e) => console.log(e));
   };
+  const handleSearch = (userInput: string) => {
+    const filteredResults: any = catalogue.filter(
+      (product: Product) =>
+        product.category.toLowerCase() === userInput.toLowerCase()
+    );
+    if (filteredResults.length > 0 && !catalogue.includes(filteredResults)) {
+      setCatalogue(filteredResults);
+    } else {
+      getCatalogue();
+    }
+  };
 
   useEffect(() => {
     getCatalogue();
   }, []);
 
   return (
-    <CatalogueContext.Provider value={{ catalogue }}>
+    <CatalogueContext.Provider value={{ catalogue, handleSearch }}>
       {children}
     </CatalogueContext.Provider>
   );
